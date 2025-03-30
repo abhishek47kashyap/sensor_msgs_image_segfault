@@ -140,7 +140,7 @@ In terminal 1, relevant logs generated on the server side have the prefix `SERVE
 On the _server_ side, make note of:
 ```
 Service get_rgbd was called!
-SERVER: Frame ID: camera_color_optical_frame
+SERVER: Assigned RGB and Depth, height = 480, width = 640, encoding: rgb8, row length = 1920
 SERVER: Data size: 921600
 SERVER: Frame ID: camera_color_optical_frame
 SERVER: size of color image height = 480, width = 640, encoding: rgb8, row length = 1920
