@@ -54,6 +54,7 @@ target_include_directories(${PROJECT_NAME}_node PUBLIC
   $<INSTALL_INTERFACE:include>)
 ament_target_dependencies(${PROJECT_NAME}_node ${dependencies})
 
+# https://github.com/ros2/ros2/issues/284#issuecomment-2548345003
 rosidl_get_typesupport_target(cpp_typesupport_target ${PROJECT_NAME} "rosidl_typesupport_cpp")
 target_link_libraries(${PROJECT_NAME}_node "${cpp_typesupport_target}") 
 
