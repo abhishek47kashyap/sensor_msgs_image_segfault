@@ -1,12 +1,10 @@
 #include "rclcpp/rclcpp.hpp"
 #include <rclcpp/qos.hpp>
 
-#include <iostream>
 #include <optional>
 
 #include "sensor_msgs/msg/image.hpp"
 #include "sensor_msgs/msg/camera_info.hpp"
-#include "sensor_msgs/image_encodings.hpp"
 
 #include <message_filters/subscriber.h>
 #include <message_filters/time_synchronizer.h>

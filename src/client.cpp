@@ -1,8 +1,6 @@
 #include "rclcpp/rclcpp.hpp"
 
-#include <optional>
 #include <chrono>
-#include <Eigen/Geometry>
 
 #include "segfault_pkg/srv/get_rgbd.hpp"
 
