@@ -63,7 +63,7 @@ private:
         RCLCPP_INFO(logger_, "CLIENT: Sending request ..");
         auto response = sync_send_request<segfault_pkg::srv::GetString>(client_string_, request).get();
 
-        RCLCPP_INFO_STREAM(logger_, "CLIENT: RGBD and camera pose acquisition status: " << std::boolalpha << response->success);
+        RCLCPP_INFO_STREAM(logger_, "CLIENT: Service request status: " << std::boolalpha << response->success);
 
         if (response->success)
         {
