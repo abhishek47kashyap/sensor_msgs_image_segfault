@@ -22,10 +22,6 @@ find_package(geometry_msgs REQUIRED)
 find_package(sensor_msgs REQUIRED)
 find_package(message_filters REQUIRED)
 find_package(std_srvs REQUIRED)
-find_package(tf2 REQUIRED)
-find_package(tf2_ros REQUIRED)
-find_package(tf2_geometry_msgs REQUIRED)
-find_package(tf2_sensor_msgs REQUIRED)
 # for stack trace pretty-printing: https://github.com/pal-robotics/backward_ros/tree/foxy-devel
 find_package(backward_ros REQUIRED)
 
@@ -35,15 +31,12 @@ set(dependencies
   sensor_msgs
   message_filters
   std_srvs
-  tf2
-  tf2_ros
-  tf2_geometry_msgs
-  tf2_sensor_msgs
+  backward_ros
 )
 
 find_package(rosidl_default_generators REQUIRED)
 rosidl_generate_interfaces(${PROJECT_NAME}
-  "srv/GetRGBD.srv"
+  "srv/GetString.srv"
   DEPENDENCIES ${dependencies}
  )
 ament_export_dependencies(rosidl_default_runtime)
