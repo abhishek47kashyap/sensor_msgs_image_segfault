@@ -68,7 +68,7 @@ private:
         if (response->success)
         {
             RCLCPP_INFO(logger_, "CLIENT: About to log output data ..");
-            RCLCPP_INFO_STREAM(logger_, "CLIENT: txt: " << response->output.data);
+            RCLCPP_INFO_STREAM(logger_, "CLIENT: txt: " << response->output.data.c_str());
             RCLCPP_INFO(logger_, "CLIENT: SUCCESS");
         }
         else
