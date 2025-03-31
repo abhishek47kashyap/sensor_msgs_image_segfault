@@ -18,8 +18,6 @@ add_compile_options(-g) # for gdb: https://docs.nav2.org/tutorials/docs/get_back
 find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(std_msgs REQUIRED)
-find_package(geometry_msgs REQUIRED)
-find_package(sensor_msgs REQUIRED)
 find_package(message_filters REQUIRED)
 find_package(std_srvs REQUIRED)
 # for stack trace pretty-printing: https://github.com/pal-robotics/backward_ros/tree/foxy-devel
@@ -27,8 +25,6 @@ find_package(backward_ros REQUIRED)
 
 set(dependencies
   std_msgs
-  geometry_msgs
-  sensor_msgs
   message_filters
   std_srvs
   backward_ros
