@@ -19,19 +19,19 @@ class GetRGBDClient : public rclcpp::Node
 {
 public:
     GetRGBDClient()
-    : Node("get_rgbd_client")
+    : Node("string_client")
     , logger_(this->get_logger())
     {
-        const std::string srv_rgbd = "get_rgbd";
+        const std::string srv_rgbd = "string";
         client_cb_group_ = this->create_callback_group(rclcpp::CallbackGroupType::Reentrant);
-        client_get_rgbd_ = this->create_client<segfault_pkg::srv::GetRGBD>(srv_rgbd, rmw_qos_profile_services_default, client_cb_group_);
+        client_string_ = this->create_client<segfault_pkg::srv::GetRGBD>(srv_rgbd, rmw_qos_profile_services_default, client_cb_group_);
         
         // wait for service to connect
         RCLCPP_INFO(logger_, "Waiting for service client to connect to server!");
         constexpr auto timeout = std::chrono::seconds(1);
-        while (rclcpp::ok() && (!client_get_rgbd_->service_is_ready()))
+        while (rclcpp::ok() && (!client_string_->service_is_ready()))
         {
-            client_get_rgbd_->wait_for_service(timeout);
+            client_string_->wait_for_service(timeout);
         }
         RCLCPP_INFO(logger_, "Service client has connected to server!");
         
@@ -47,7 +47,7 @@ private:
     rclcpp::Service<std_srvs::srv::Trigger>::SharedPtr srv_cli_trigger;
 
     rclcpp::CallbackGroup::SharedPtr client_cb_group_;
-    rclcpp::Client<segfault_pkg::srv::GetRGBD>::SharedPtr client_get_rgbd_;
+    rclcpp::Client<segfault_pkg::srv::GetRGBD>::SharedPtr client_string_;
 
 
     void callbackTrigger(const std::shared_ptr<std_srvs::srv::Trigger::Request> req, std::shared_ptr<std_srvs::srv::Trigger::Response>      res)
@@ -59,19 +59,16 @@ private:
 
         // Get RGBD
         auto request = std::make_shared<segfault_pkg::srv::GetRGBD::Request>();
+        request->input.data = "Hello there!";
         RCLCPP_INFO(logger_, "CLIENT: Sending request ..");
-        auto response = sync_send_request<segfault_pkg::srv::GetRGBD>(client_get_rgbd_, request).get();
+        auto response = sync_send_request<segfault_pkg::srv::GetRGBD>(client_string_, request).get();
 
         RCLCPP_INFO_STREAM(logger_, "CLIENT: RGBD and camera pose acquisition status: " << std::boolalpha << response->success);
 
         if (response->success)
         {
-            RCLCPP_INFO_STREAM(logger_, "CLIENT: Size of color image height = " << response->rgb.height << ", width = " << response->rgb.width << ", encoding: " << response->rgb.encoding << ", row length = " << response->rgb.step);
-            RCLCPP_INFO_STREAM(logger_, "CLIENT: Data size: " << response->rgb.data.size());
-            RCLCPP_INFO_STREAM(logger_, "CLIENT: is_bigendian: " << response->rgb.is_bigendian);
-            RCLCPP_INFO(logger_, "CLIENT: About to log header frame ID..");
-            RCLCPP_INFO_STREAM(logger_, "CLIENT: header frame ID: " << response->rgb.header.frame_id);  // <- segfaults
-            const sensor_msgs::msg::Image rgb_img = response->rgb;
+            RCLCPP_INFO(logger_, "CLIENT: About to log output data ..");
+            RCLCPP_INFO_STREAM(logger_, "CLIENT: txt: " << response->output.data);
             RCLCPP_INFO(logger_, "CLIENT: SUCCESS");
         }
         else

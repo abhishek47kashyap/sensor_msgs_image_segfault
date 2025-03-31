@@ -1,5 +1,4 @@
+std_msgs/String input
 ---
-sensor_msgs/Image rgb
-sensor_msgs/Image depth
-sensor_msgs/CameraInfo intrinsics
+std_msgs/String output
 bool success
