@@ -61,7 +61,7 @@ private:
         auto request = std::make_shared<segfault_pkg::srv::GetString::Request>();
         request->input.data = "Hello there!";
         RCLCPP_INFO(logger_, "CLIENT: Sending request ..");
-        auto response = sync_send_request<segfault_pkg::srv::GetString>(client_string_, request).get();
+        auto response = sync_send_request<segfault_pkg::srv::GetString>(client_string_, request);
 
         RCLCPP_INFO_STREAM(logger_, "CLIENT: Service request status: " << std::boolalpha << response->success);
 
